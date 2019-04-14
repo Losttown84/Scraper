@@ -2,6 +2,7 @@
 var express = require("express");
 var expressHandlebars = require("express-handlebars");
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 
 // Set up port
 var PORT = process.env.PORT || 3000;
@@ -28,6 +29,18 @@ app.use(bodyParser.urlencoded({
 
 // requests go here
 app.use(router);
+
+// use database deployed otherwise monghoHeadlines db
+var db = process.env.MONGOD_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(db, function(error) {
+  if(error) {
+    console.log(error);
+  }
+  else {
+    console.log("mongoose connection successful");
+  }
+});
 
 // i'm listening
 app.listen(PORT, function() {
