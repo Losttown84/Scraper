@@ -11,12 +11,12 @@ var app = express();
 var router = express.Router();
 
 // public folder for directory
-app.use(express.stats(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 
 // requests go here
 app.use(router);
 
 // i'm listening
 app.listen(PORT, function() {
-  console.log("Listening on port:" PORT);
+  console.log("Listening on port:", PORT);
 });
