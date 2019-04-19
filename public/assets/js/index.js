@@ -22,7 +22,36 @@ $(document).read(function() {
     var articlePanel = [];
 
     for (var i = 0; i < articles.length; i++) {
-      articlePanel.push(createPanel(articles[i]));
+      articlePanels.push(createPanel(articles[i]));
     }
+    artContainer.append(articlePanels);
+  }
+  function createPanel(article) {
+    var panel = 
+    $(["<div class='panel panel-default'>",
+      "<div class='panel-heading'>",
+      "<h3>",
+      article.headline,
+      "<a class='btn btn-sucess save'>",
+      "Save Article",
+      "</a>",
+      "</h3>",
+      "<div class='panel-body'>",
+      article.summary,
+      "</div>",
+      "</div>"
+    ].join(""));
+  panel.data("_id", article._id);
+  return panel;  
+  }
+  function renderEmpty() {
+    var emptyPanel = 
+    $(["<div class='alert alert-warning text-center'>",
+      "<h3>No new articles!",
+      "</h3>",
+      "<div class='panel-body'>",
+      article.summary,
+      "</div>",
+      "</div>"])
   }
 })
