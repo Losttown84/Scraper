@@ -23,4 +23,20 @@ module.exports = function(router) {
       }
     });
   });
+  router.get("/api/headlines", function(req, res) {
+    var query = {};
+    if (req.query.saved) {
+      query = req.query;
+    }
+    headlineControl.get(query, function(data) {
+      res.json(data);
+    });
+  });
+  router.delete("/api/headlines/:id", function(req, res) {
+    var query = {};
+    query.id = req.params.id;
+    headlineControl.delete(query, function(err, data) {
+      res.json(data);
+    });
+  });
 }
