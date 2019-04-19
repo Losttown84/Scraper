@@ -39,4 +39,23 @@ module.exports = function(router) {
       res.json(data);
     });
   });
+  router.patch("/api/headlines", function(req, res) {
+    headlineControl.update(req.body, function(err, data) {
+      res.json(data);
+    });
+  });
+  router.get("/api/notes/:headline_id", function(req, res) {
+    var query = {};
+    if (req.params.headline_id) {
+      query._id = req.params.headline_id;
+    }
+    noteControl.get(query, function (err, data) {
+      res.json(data);
+    });
+  });
+  router.post("api/notes", function(req, res) {
+    noteControl.save(req.body, function(data) {
+      res.json(data);
+    });
+  });
 }
