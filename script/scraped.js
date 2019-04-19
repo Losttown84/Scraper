@@ -10,6 +10,23 @@ var scrape = function (cb) {
 
     var articles = [];
 
-    $(".mediawall__kicker").each(function(i, element))
-  })
-}
+    $(".mediawall__article-preview").each(function(i, element) {
+      var head = $(this).children("mediawall__kicker").text().trim();
+      var sum = $(this).children("mediawall__blurb").text().trim();
+
+      if(head && sum) {
+        var neatHead = head.replace(/(\r\n\|\n|\r|\t|\t|\s+)/gm, "").trim();
+        var neatSum = sum.replace(/(\r\n\|\n|\r|\t|\t|\s+)/gm, "").trim();
+        var data = {
+          headline = neatHead,
+          summary: neatSum
+        };
+
+        articles.push(datatoAdd);
+      }
+    })
+    cb(articles);
+  });
+};
+
+modules.export = scrape;
